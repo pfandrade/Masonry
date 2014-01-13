@@ -72,6 +72,9 @@
       location = "group:Examples/Masonry iOS Examples.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:Examples/Masonry OSX Examples/Masonry OSX Examples.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Tests/Masonry Tests.xcodeproj">
    </FileRef>
    <FileRef
