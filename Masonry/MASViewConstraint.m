@@ -58,11 +58,16 @@
 
 - (void)setLayoutConstant:(CGFloat)layoutConstant {
     _layoutConstant = layoutConstant;
+
+#if TARGET_OS_MAC && !TARGET_OS_IPHONE
     if(self.useAnimator) {
         self.layoutConstraint.animator.constant = layoutConstant;
     } else {
         self.layoutConstraint.constant = layoutConstant;
     }
+#else
+    self.layoutConstraint.constant = layoutConstant;
+#endif
 }
 
 - (void)setLayoutRelation:(NSLayoutRelation)layoutRelation {
