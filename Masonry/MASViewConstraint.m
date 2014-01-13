@@ -22,6 +22,7 @@
 @property (nonatomic, assign) CGFloat layoutConstant;
 @property (nonatomic, assign) BOOL hasLayoutRelation;
 @property (nonatomic, strong) id mas_key;
+@property (nonatomic, assign) BOOL useAnimator;
 
 @end
 
@@ -57,7 +58,11 @@
 
 - (void)setLayoutConstant:(CGFloat)layoutConstant {
     _layoutConstant = layoutConstant;
-    self.layoutConstraint.constant = layoutConstant;
+    if(self.useAnimator) {
+        self.layoutConstraint.animator.constant = layoutConstant;
+    } else {
+        self.layoutConstraint.constant = layoutConstant;
+    }
 }
 
 - (void)setLayoutRelation:(NSLayoutRelation)layoutRelation {
@@ -246,6 +251,18 @@
 - (id<MASConstraint>)with {
     return self;
 }
+
+#pragma mark - Animator proxy
+
+#if TARGET_OS_MAC && !TARGET_OS_IPHONE
+
+- (id<MASConstraint>)animator
+{
+    self.useAnimator = YES;
+    return self;
+}
+
+#endif
 
 #pragma mark - debug helpers
 
